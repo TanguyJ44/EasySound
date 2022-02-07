@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EasySound</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EasySound.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+</head>
+<body>
+    <header>
+        <div>
+            <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="box-shadow: 1px 1px 12px #555;">
+                <div class="container">
+                    <a class="navbar-brand" asp-page="/Index">🔊 EasySound</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navcol-1">
+                        <ul class="nav navbar-nav mr-auto" style="text-align: center;margin-left: auto; margin-right: auto;">
+                            <li class="nav-item" role="presentation"><a class="nav-link" asp-page="/Index">Premium</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" asp-page="/Index">Assistance</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" asp-page="/Index">Télécharger</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" id="toggleMode">🌒</a></li>
+                        </ul>
+                    </div>
+                    <partial name="_LoginPartial" />
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <div class="footer-basic">
+        <footer>
+            <div class="social">
+                <a href="#"><i class="icon ion-social-instagram"></i></a>
+                <a href="#"><i class="icon ion-social-snapchat"></i></a>
+                <a href="#"><i class="icon ion-social-twitter"></i></a>
+                <a href="#"><i class="icon ion-social-facebook"></i></a>
+            </div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Accueil</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">À propos de</a></li>
+                <li class="list-inline-item"><a href="#">Conditions d'utilisation</a></li>
+                <li class="list-inline-item"><a href="#">Politique de confidentialité</a></li>
+            </ul>
+            <p class="copyright">EasySound © 2022</p>
+        </footer>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,34 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Mon Espace";
+}
+
+<div class="row">
+    <div class="offset-md-1 col-md-10">
+        <section>
+
+            <div class="newpl-clean">
+                <form method="post">
+                    <h2 class="sr-only">Nouvelle playlist</h2>
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Nom de ma playlist" aria-required="true">
+                    </div>
+                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Créer ma playlist</button></div>
+                </form>
+            </div>
+
+            <div class="pl-clean">
+                <form>
+                    <h2 class="sr-only">Mes playlists</h2>
+                    
+                </form>
+            </div>
+
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySound", "EasySound\EasySound.csproj", "{472E56C3-206B-4589-81D8-78C1579E8A2E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{472E56C3-206B-4589-81D8-78C1579E8A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{472E56C3-206B-4589-81D8-78C1579E8A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{472E56C3-206B-4589-81D8-78C1579E8A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{472E56C3-206B-4589-81D8-78C1579E8A2E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1124040F-8BB2-4BBA-918B-FD3EACE60E27}
+	EndGlobalSection
+EndGlobal
