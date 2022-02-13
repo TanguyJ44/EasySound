@@ -5,15 +5,27 @@
 
 var docAttr = document.documentElement;
 var toggleBtn = document.getElementById("toggleMode");
+const guiColor = getCookie('gui-color');
+
+
+if (guiColor != null) {
+    if (guiColor == "dark") {
+        docAttr.setAttribute('data-theme', 'dark');
+    } else if (guiColor == "light") {
+        docAttr.setAttribute('data-theme', 'light');
+    }
+}
 
 
 toggleBtn.onclick = function () {
     if (toggleBtn.innerHTML == "🌒") {
         toggleBtn.innerHTML = "🌖";
         docAttr.setAttribute('data-theme', 'dark');
+        setCookie("gui-color", "dark", 9999);
     } else {
         toggleBtn.innerHTML = "🌒";
         docAttr.setAttribute('data-theme', 'light');
+        setCookie("gui-color", "light", 9999);
     }
 }
 
@@ -44,3 +56,36 @@ document.getElementById("playpause2").onclick = function () {
 
 wavesurfer01.load('../musics/test01.mp3');
 wavesurfer02.load('../musics/test01.mp3');
+
+
+////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    document.cookie = name + '=; Max-Age=-99999999;';
+}
+
+
+

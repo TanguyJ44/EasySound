@@ -52,6 +52,9 @@ namespace EasySound.Data.Migrations
                     b.Property<string>("PlaylistId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SoundLink")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SoundName")
                         .HasColumnType("nvarchar(max)");
 

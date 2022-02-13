@@ -8,5 +8,6 @@ namespace EasySound.Data
         public int SoundId { get; set; }
         public string? PlaylistId { get; set; }
         public string? SoundName { get; set; }
+        public string? SoundLink { get; set; }
     }
 }

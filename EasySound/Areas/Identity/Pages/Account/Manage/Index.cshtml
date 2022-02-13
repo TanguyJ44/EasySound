@@ -12,22 +12,145 @@
                 <form method="post">
                     <h2 class="sr-only">Nouvelle playlist</h2>
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Nom de ma playlist" aria-required="true">
+                        <input class="form-control" type="text" name="plname" placeholder="Nom de ma playlist" aria-required="true">
                     </div>
                     <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Créer ma playlist</button></div>
                 </form>
             </div>
 
             <div class="pl-clean">
-                <form>
-                    <h2 class="sr-only">Mes playlists</h2>
-                    
-                </form>
+                <h2 class="sr-only">Mes playlists</h2>
+
+                <div id="waveform"></div>
+
+                @if (Model.CountPL == 0)
+                {
+                    <p>Vous ne possédez pas encore de playlists !</p>
+                }
+                else
+                {
+                    <ul class="list-group">
+                        @{
+                            int i = 0;
+                        }
+                        @foreach (var data in Model.ListPL)
+                        {
+                            <div class="card card-pl">
+                                <div class="card-header">
+                                    <span id="pl-title">@data.PlaylistName</span>
+                                    <span style="float: right;">
+                                        @Html.ActionLink("Supprimer cette playlist", "Delete", "Home", new { id = data.PlaylistId })
+                                    </span>
+                                </div>
+
+                                <div class="btn-group" role="group" style="margin-bottom: 20px;">
+                                    <button type="button" class="btn btn-secondary" onclick="wavesurfer.skipBackward()">⏪ En arrière </button>
+                                    <button type="button" class="btn btn-success" onclick="startStop(@i);">▶️ Lecture / Stop ⏹</button>
+                                    <button type="button" class="btn btn-warning" onclick="wavesurfer.playPause();">⏯ Play / Pause</button>
+                                    <button type="button" class="btn btn-secondary" onclick="wavesurfer.skipForward()">En avant ⏩</button>
+                                </div>
+
+                                <ul class="list-group list-group-flush" id="plSounds-@i">
+                                    @foreach (var dataSound in Model.ListSounds.ElementAt(i))
+                                    {
+                                        <li class="list-group-item" data-link="@dataSound.SoundLink">
+                                            @dataSound.SoundName
+                                            <span style="float: right;">
+                                                @Html.ActionLink("Supprimer", "DeleteSound", "Home", new { id = dataSound.SoundId })
+                                            </span>
+                                        </li>
+                                    }
+                                </ul>
+
+                                <form method="post" style="margin-top: 20px;">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Nom de la musique</span>
+                                        </div>
+                                        <input type="text" class="form-control" name="soundname">
+                                    </div>
+
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">https://</span>
+                                        </div>
+                                        <input type="text" class="form-control" aria-label="Small" name="soundlink">
+                                    </div>
+
+                                    <input type="text" class="form-control" aria-label="Small" name="plid" value="@data.PlaylistId" style="display: none;">
+
+                                    <button type="submit" class="btn btn-outline-primary">Ajouter une musique</button>
+                                </form>
+                            </div>
+
+                            i++;
+                        }
+                    </ul>
+                }
+
             </div>
 
         </section>
     </div>
 </div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://unpkg.com/wavesurfer.js"></script>
+<script>
+
+    let links;
+    let currentTrack = 0;
+    let isPlaying = false;
+
+    let wavesurfer;
+
+    let setCurrentSong = function (index) {
+        currentTrack = index;
+        // links[currentTrack].removeChild(playingIco);
+        wavesurfer.load(links[currentTrack].getAttribute('data-link'));
+    };
+
+    function startStop(id) {
+        if (!isPlaying) {
+            links = document.querySelectorAll('#plSounds-' + id + ' li');
+
+            wavesurfer = WaveSurfer.create({
+                container: '#waveform',
+                waveColor: '#428bca',
+                progressColor: '#31708f',
+                height: 120,
+                barWidth: 3
+            });
+
+            wavesurfer.on('ready', function () {
+                wavesurfer.play();
+            });
+
+            wavesurfer.on('finish', function () {
+                if ((currentTrack + 1) < links.length) {
+                    setCurrentSong(currentTrack + 1);
+                } else {
+                    wavesurfer.stop();
+                    $("#waveform").empty();
+                    isPlaying = false;
+                }
+            });
+
+            isPlaying = true;
+            currentTrack = 0;
+
+            setCurrentSong(currentTrack);
+        } else {
+            wavesurfer.stop();
+
+            $("#waveform").empty();
+
+            isPlaying = false;
+        }
+    }
+
+</script>
+
 
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />

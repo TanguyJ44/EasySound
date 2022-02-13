@@ -825,3 +825,11 @@ body {
     user-select: none;
     cursor: pointer;
 }
+
+.card-pl {
+    margin-top: 50px;
+}
+
+#pl-title {
+    font-weight: bold;
+}
